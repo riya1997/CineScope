@@ -1,5 +1,4 @@
 // You can work here or download the template
-console.log("Hi");
 
  const options = {
   method: 'GET',
@@ -8,26 +7,22 @@ console.log("Hi");
     Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5NjdlYzEzMGY1M2QxN2VjNzNhNzEzYmNiNjk3MGU5NiIsIm5iZiI6MTc3OTM2NTk5MS4zMjcwMDAxLCJzdWIiOiI2YTBlZjg2N2FhYWQ3YjQwOTQzOGQ2YzciLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.5-N1SLF1zrgOlYvvBBRg217FfmoqVZPj7_aXpp8aFAU'
   }
 };
-const getMovieArray = async () => {
-	
-const res = await fetch('https://api.themoviedb.org/3/movie/popular?language=en-US&page=1', options);
+const getMovieArray = async () => {	
+	const res = await fetch('https://api.themoviedb.org/3/movie/popular?language=en-US&page=1', options);
  
-if (!res.ok) throw new Error(`${res.status}. Something went wrong!`);
+	if (!res.ok) throw new Error(`${res.status}. Something went wrong!`);
 
 	const data = await res.json();    
 	return data;
-
 };
 
 
 const renderMovies = (movies, container) => {
 	
 	movies.forEach((movie) => {
-       // console.log(movie.name);
-	//	console.log(movie.profile_path);
+    
         
         let spanContainer = document.createElement("span"); 
-		//let imgspanContainer = document.createElement("span"); 
         let figElem = document.createElement('figure');
         let imageElem = document.createElement('img');
         
@@ -48,14 +43,32 @@ const renderMovies = (movies, container) => {
 			spanContainer.appendChild(titletextnode);
 			spanContainer.appendChild(document.createElement("br"));
             spanContainer.appendChild(infotextnode);
+
+			//Create and add Fav button
+			let favButton=document.createElement("button");
+    		favButton.appendChild(document.createTextNode('Add to Fav'));
+    		favButton.classList = "mt-3 px-4 py-2 bg-pink-500 hover:bg-blue-400 text-white rounded";
+    		favButton.addEventListener('click', (e) => {
+				let dataId = movie.id;
+				console.log(dataId);
+				const allFavMovies = JSON.parse(localStorage.getItem('favMovie')) || [];   
+				console.log("allFavMovies:",allFavMovies);
+				const index = allFavMovies.findIndex(x => x.obj.id === dataId);
+				console.log(index);
+				if (index === -1) { 
+					console.log("Add to fav storage.");
+					const movieInfo={
+						obj:movie,
+						info:''
+					}
+					allFavMovies.push(movieInfo); 
+					localStorage.setItem('favMovie', JSON.stringify(allFavMovies));
+				}
+						
+			});
+    		spanContainer.appendChild(favButton);
+
 			document.getElementById(container).appendChild(spanContainer);
-			//document.getElementById(container).appendChild(imgspanContainer);
-
-		/*fetch(url)
-		.then(res => console.log(res))
-		.catch(err => console.error(err));*/
-
-       
    
 });
 };
@@ -78,4 +91,4 @@ async function  asyncTodo() {
 	}
 }
 asyncTodo();
-		// You can work here or download the template
+		
