@@ -91,4 +91,46 @@ async function  asyncTodo() {
 	}
 }
 asyncTodo();
+
+const search = document.getElementById("searchBtn");
+const searchInput = document.getElementById("searchImput");
+
+search.addEventListener(
+  "click",
+  (event) => {
+	if(searchInput.value){
+	let dialogP=document.getElementById("dialogP");
+	dialogP.innerHTML = "";
+
+	const allFavMovies = JSON.parse(localStorage.getItem('favMovie')) || [];   
+	let searchVal=searchInput.value;
+	
+	let movieFound=false;
+	allFavMovies.forEach((movieObj) => {
+		let movie=movieObj.obj.title;
+		if(movie.includes(searchVal)){
+			console.log("Movie found:",movie);
+			let titletextnode=document.createTextNode("Movie found:"+movie);
+			dialogP.appendChild(titletextnode);
+			dialogP.appendChild(document.createElement("br"));
+			let infotextnode=document.createTextNode("Info:"+movieObj.info+"hello info");
+			dialogP.appendChild(infotextnode);
+			movieFound=true;
+			return;
+		}
+		
+	});
+
+	if(!movieFound){
+		let titletextnode=document.createTextNode("Movie not found.");
+			dialogP.appendChild(titletextnode);
+	}
+	searchInput.value='';
+	let dialog = document.getElementById('myDialog');
+	dialog.style.top = ((window.innerHeight/2) - (dialog.offsetHeight/2))+'px';
+  	dialog.style.left = ((window.innerWidth/2) - (dialog.offsetWidth/2))+'px';
+	dialog.open = true;
+	
+  }}
+);
 		
