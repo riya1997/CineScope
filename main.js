@@ -53,7 +53,7 @@ const renderMovies = (movies, container) => {
 				console.log(dataId);
 				const allFavMovies = JSON.parse(localStorage.getItem('favMovie')) || [];   
 				console.log("allFavMovies:",allFavMovies);
-				const index = allFavMovies.findIndex(x => x.id === dataId);
+				const index = allFavMovies.findIndex(x => x.obj.id === dataId);
 				console.log(index);
 				if (index === -1) { 
 					console.log("Add to fav storage.");
