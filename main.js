@@ -46,26 +46,36 @@ const renderMovies = (movies, container) => {
 
 			//Create and add Fav button
 			let favButton=document.createElement("button");
-    		favButton.appendChild(document.createTextNode('Add to Fav'));
+    		
     		favButton.classList = "mt-3 px-4 py-2 bg-pink-500 hover:bg-blue-400 text-white rounded";
+			//let movieFound=false;
     		favButton.addEventListener('click', (e) => {
 				let dataId = movie.id;
-				console.log(dataId);
+				//console.log(dataId);
 				const allFavMovies = JSON.parse(localStorage.getItem('favMovie')) || [];   
-				console.log("allFavMovies:",allFavMovies);
+				//console.log("allFavMovies:",allFavMovies);
+				//const index = (allFavMovies.length>0)?allFavMovies.findIndex(x => x.obj.id === dataId):(-1);
 				const index = allFavMovies.findIndex(x => x.obj.id === dataId);
-				console.log(index);
+				//console.log(index);
 				if (index === -1) { 
-					console.log("Add to fav storage.");
+					//console.log("Add to fav storage.");
 					const movieInfo={
 						obj:movie,
 						info:''
 					}
 					allFavMovies.push(movieInfo); 
 					localStorage.setItem('favMovie', JSON.stringify(allFavMovies));
+					favButton.textContent='Remove from Fav';
+				}else if (index => -1) { 
+					console.log("Remove from fav storage.");
+					//delete from storage
+					allFavMovies.splice(index,1);
+					localStorage.setItem('favMovie', JSON.stringify(allFavMovies));
+					favButton.textContent='Add to Fav';
 				}
 						
 			});
+			favButton.textContent='Add to Fav';
     		spanContainer.appendChild(favButton);
 
 			document.getElementById(container).appendChild(spanContainer);
