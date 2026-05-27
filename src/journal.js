@@ -25,17 +25,18 @@ movieArray.forEach((movie, index) => {
   spanContainer.appendChild(document.createElement("br"));
   spanContainer.appendChild(infotextnode);
 
-  if (movie.info) {
-    const noteDiv = document.createElement("div");
-    noteDiv.textContent = "Note: " + movie.info;
-    noteDiv.className = "mt-2 p-2 bg-blue-100 rounded";
-    spanContainer.appendChild(noteDiv);
-  }
-
   const addButton = document.createElement("button");
-  addButton.textContent = "Add Note";
+  addButton.textContent = movie.info ? "Update Note" : "Add Note";
   addButton.classList =
     "mt-3 px-4 py-2 bg-blue-200 hover:bg-blue-400 text-black rounded";
+
+  const noteDiv = document.createElement("div");
+  noteDiv.className = "mt-2 p-2 bg-blue-100 rounded";
+
+  if (movie.info) {
+    noteDiv.textContent = "Note: " + movie.info;
+    spanContainer.appendChild(noteDiv);
+  }
 
   addButton.addEventListener("click", (e) => {
     const textArea = document.createElement("textarea");
@@ -43,18 +44,32 @@ movieArray.forEach((movie, index) => {
       "mt-3 px-1 py-1 bg-blue-200 hover:bg-blue-400 text-black rounded";
     textArea.placeholder = "Enter your note here";
 
-    spanContainer.appendChild(textArea);
-
     textArea.value = movie.info || "";
 
-    textArea.addEventListener("input", () => {
+    function saveNote() {
       movie.info = textArea.value;
       movieArray[index] = movie;
 
       localStorage.setItem("favMovie", JSON.stringify(movieArray));
+      noteDiv.textContent = "Note: " + textArea.value;
+      spanContainer.appendChild(noteDiv);
+      addButton.textContent = "Update Note";
+      if (textArea.value === "") {
+        noteDiv.remove();
+        addButton.textContent = "Add Note";
+      }
+      location.reload();
+    }
+    textArea.addEventListener("blur", saveNote);
+    textArea.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        saveNote();
+        textArea.blur();
+      }
     });
+    spanContainer.appendChild(textArea);
   });
-
   spanContainer.appendChild(addButton);
   container.appendChild(spanContainer);
 });
