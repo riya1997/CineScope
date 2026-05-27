@@ -26,9 +26,9 @@ const renderMovies = (movies, container) => {
         let figElem = document.createElement('figure');
         let imageElem = document.createElement('img');
         
-        let titletextnode=document.createTextNode("Title: "+movie.title);
-		let infotextnode=document.createTextNode("Info: "+movie.overview);
-        spanContainer.className='flex flex-col text-violet-600 item-center justify-start bg-green-100 rounded-md';
+        let titletextnode=document.createTextNode(movie.title);
+		let infotextnode=document.createTextNode(movie.overview);
+        spanContainer.className='flex flex-col text-[#303738] item-center text-center justify-center bg-[#b37839] rounded-md';
         
 
 		
@@ -40,14 +40,21 @@ const renderMovies = (movies, container) => {
             imageElem.className='mb-4';
 			figElem.appendChild(imageElem);
             spanContainer.appendChild(figElem);
-			spanContainer.appendChild(titletextnode);
+			let bold = document.createElement('strong');
+    		bold.className='text-[#611105]';
+    		bold.appendChild(titletextnode); 
+			spanContainer.appendChild(bold);
 			spanContainer.appendChild(document.createElement("br"));
-            spanContainer.appendChild(infotextnode);
+			spanContainer.appendChild(document.createElement("br"));
+			let info = document.createElement('strong');
+    		info.className='text-[#252900]';
+    		info.appendChild(infotextnode); 
+			spanContainer.appendChild(info);
 
 			//Create and add Fav button
 			let favButton=document.createElement("button");
     		
-    		favButton.classList = "mt-3 px-4 py-2 bg-pink-500 hover:bg-blue-400 text-white rounded";
+    		favButton.classList = "mt-1 px-1 py-2 bg-[#4f335c] hover:bg-blue-400 text-white rounded";
 			//let movieFound=false;
     		favButton.addEventListener('click', (e) => {
 				let dataId = movie.id;
