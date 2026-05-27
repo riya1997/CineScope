@@ -20,6 +20,13 @@ const getMovieArray = async () => {
 const renderMovies = (movies, container) => {
 	
 	movies.forEach((movie) => {
+
+		let dataId = movie.id;
+		//console.log(dataId);
+		const allFavMovies = JSON.parse(localStorage.getItem('favMovie')) || [];   
+		//console.log("allFavMovies:",allFavMovies);
+		//const index = (allFavMovies.length>0)?allFavMovies.findIndex(x => x.obj.id === dataId):(-1);
+		const index = allFavMovies.findIndex(x => x.obj.id === dataId);
     
         
         let spanContainer = document.createElement("span"); 
@@ -28,7 +35,7 @@ const renderMovies = (movies, container) => {
         
         let titletextnode=document.createTextNode(movie.title);
 		let infotextnode=document.createTextNode(movie.overview);
-        spanContainer.className='flex flex-col text-[#303738] item-center text-center justify-center bg-[#b37839] rounded-md';
+        spanContainer.className='flex flex-col text-[#303738] items-center text-center justify-start bg-[#b37839] rounded-xl';
         
 
 		
@@ -37,14 +44,13 @@ const renderMovies = (movies, container) => {
 
 			imageElem.src = url;
             imageElem.alt = movie.original_name;
-            imageElem.className='mb-4';
+            imageElem.className='mb-4 rounded-xl';
 			figElem.appendChild(imageElem);
             spanContainer.appendChild(figElem);
 			let bold = document.createElement('strong');
     		bold.className='text-[#611105]';
     		bold.appendChild(titletextnode); 
 			spanContainer.appendChild(bold);
-			spanContainer.appendChild(document.createElement("br"));
 			spanContainer.appendChild(document.createElement("br"));
 			let info = document.createElement('strong');
     		info.className='text-[#252900]';
@@ -54,15 +60,9 @@ const renderMovies = (movies, container) => {
 			//Create and add Fav button
 			let favButton=document.createElement("button");
     		
-    		favButton.classList = "mt-1 px-1 py-2 bg-[#4f335c] hover:bg-blue-400 text-white rounded";
+    		favButton.classList = " w-[150px] mt-1 px-1 py-2 bg-[#4f335c] hover:bg-blue-400 text-white rounded";
 			//let movieFound=false;
     		favButton.addEventListener('click', (e) => {
-				let dataId = movie.id;
-				//console.log(dataId);
-				const allFavMovies = JSON.parse(localStorage.getItem('favMovie')) || [];   
-				//console.log("allFavMovies:",allFavMovies);
-				//const index = (allFavMovies.length>0)?allFavMovies.findIndex(x => x.obj.id === dataId):(-1);
-				const index = allFavMovies.findIndex(x => x.obj.id === dataId);
 				//console.log(index);
 				if (index === -1) { 
 					//console.log("Add to fav storage.");
@@ -82,7 +82,13 @@ const renderMovies = (movies, container) => {
 				}
 						
 			});
-			favButton.textContent='Add to Fav';
+			console.log(index);
+			if(index === -1){
+				favButton.textContent='Add to Fav';
+			}else{
+				favButton.textContent='Remove from Fav';
+			}
+			
     		spanContainer.appendChild(favButton);
 
 			document.getElementById(container).appendChild(spanContainer);
