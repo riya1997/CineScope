@@ -82,7 +82,7 @@ const renderMovies = (movies, container) => {
 				}
 						
 			});
-			console.log(index);
+			//console.log(index);
 			if(index === -1){
 				favButton.textContent='Add to Fav';
 			}else{
@@ -103,10 +103,10 @@ const errorHandler = (errorMsg, container) => {
 	h2.textContent = errorMsg;
 	document.getElementById(container).appendChild(h2);
 };
-
+let allMovies=[];
 async function  asyncTodo() {
 	try {
-		const allMovies = await getMovieArray();
+		 allMovies = await getMovieArray();
       // console.log("Print all data",allMovies.results);
         renderMovies(allMovies.results, 'movie-container');
 	} catch (error) {
@@ -131,13 +131,15 @@ search.addEventListener(
 	let movieFound=false;
 	allFavMovies.forEach((movieObj) => {
 		let movie=movieObj.obj.title;
-		if(movie.toLowerCase().includes(searchVal.toLowerCase())){
+		let info=movieObj.info;
+		if(movie.toLowerCase().includes(searchVal.toLowerCase()) || info.toLowerCase().includes(searchVal.toLowerCase())){
 			console.log("Movie found:",movie);
-			let titletextnode=document.createTextNode("Movie found:"+movie);
+			let titletextnode=document.createTextNode("Movie found in Favourite: "+movie);
 			dialogP.appendChild(titletextnode);
 			dialogP.appendChild(document.createElement("br"));
-			let infotextnode=document.createTextNode("Info:"+movieObj.info+"hello info");
+			let infotextnode=document.createTextNode("Info:"+movieObj.info);
 			dialogP.appendChild(infotextnode);
+			dialogP.appendChild(document.createElement("br"));
 			movieFound=true;
 			return;
 		}
@@ -145,8 +147,23 @@ search.addEventListener(
 	});
 
 	if(!movieFound){
-		let titletextnode=document.createTextNode("Movie not found.");
-			dialogP.appendChild(titletextnode);
+		allMovies.results.forEach((movieObj) => {
+			let movie=movieObj.title;
+			if(movie.toLowerCase().includes(searchVal.toLowerCase())){
+				console.log("Movie found:",movie);
+				let titletextnode=document.createTextNode("Movie found: "+movie);
+				dialogP.appendChild(titletextnode);
+				dialogP.appendChild(document.createElement("br"));
+				movieFound=true;
+				return;
+			}
+			
+		});
+
+		if(!movieFound){
+			let titletextnode=document.createTextNode("Movie not found.");
+				dialogP.appendChild(titletextnode);
+		}
 	}
 	searchInput.value='';
 	let dialog = document.getElementById('myDialog');
