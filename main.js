@@ -131,7 +131,7 @@ search.addEventListener(
 	let movieFound=false;
 	allFavMovies.forEach((movieObj) => {
 		let movie=movieObj.obj.title;
-		if(movie.includes(searchVal)){
+		if(movie.toLowerCase().includes(searchVal.toLowerCase())){
 			console.log("Movie found:",movie);
 			let titletextnode=document.createTextNode("Movie found:"+movie);
 			dialogP.appendChild(titletextnode);
