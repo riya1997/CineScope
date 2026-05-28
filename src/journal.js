@@ -18,7 +18,7 @@ movieArray.forEach((movie, index) => {
 
   imageElem.src = url;
   imageElem.alt = movie.obj.original_name;
-  imageElem.className = "mb-4";
+  imageElem.className = "mb-4 rounded-xl";
   figElem.appendChild(imageElem);
   spanContainer.appendChild(figElem);
   spanContainer.appendChild(title);
@@ -28,10 +28,10 @@ movieArray.forEach((movie, index) => {
   const addButton = document.createElement("button");
   addButton.textContent = movie.info ? "Update Note" : "Add Note";
   addButton.classList =
-    " w-[150px] mt-1 px-1 py-2 bg-[#4f335c] hover:bg-blue-400 text-white rounded";
+    " w-[150px] mt-1 mb-1 px-1 py-2 bg-[#4f335c] hover:bg-blue-400 text-white rounded";
 
   const noteDiv = document.createElement("div");
-  noteDiv.className = " w-[150px] mt-2 px-1 py-2 bg-[#4f335c] text-white rounded";
+  noteDiv.className = "mt-2";
 
   if (movie.info) {
     noteDiv.textContent = "Note: " + movie.info;
