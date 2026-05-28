@@ -138,9 +138,11 @@ search.addEventListener(
 			let titletextnode=document.createTextNode("Movie found in Favourite: "+movie);
 			dialogP.appendChild(titletextnode);
 			dialogP.appendChild(document.createElement("br"));
-			let infotextnode=document.createTextNode("Info:"+movieObj.info);
-			dialogP.appendChild(infotextnode);
-			dialogP.appendChild(document.createElement("br"));
+			if(movieObj.info){
+				let infotextnode=document.createTextNode("Note:"+movieObj.info);
+				dialogP.appendChild(infotextnode);
+				dialogP.appendChild(document.createElement("br"));
+			}
 			movieFound=true;
 			return;
 		}
