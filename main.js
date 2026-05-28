@@ -35,7 +35,7 @@ const renderMovies = (movies, container) => {
         
         let titletextnode=document.createTextNode(movie.title);
 		let infotextnode=document.createTextNode(movie.overview);
-        spanContainer.className='flex flex-col text-[#303738] items-center text-center justify-start bg-[#b37839] rounded-xl';
+        spanContainer.className='flex flex-col text-[#303738] items-center text-center justify-start rounded-xl bg-gradient-to-r from-red-300 to-blue-800';
         
 
 		
