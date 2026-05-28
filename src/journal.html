@@ -1,59 +1,52 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en-US">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Movie Storage</title>
+    <title>Movie Journal</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   </head>
-  <body class="max-h-full bg-gradient-to-r from-blue-600 to-green-500 box-border m-0 p-0 font-[Montserrat]">
+  <body
+    class="max-h-full bg-gradient-to-r from-blue-600 to-green-500 box-border m-0 p-0 font-[Montserrat]"
+  >
     <header class="bg-gradient-to-r from-green-400 to-red-500 m-0 p-16">
-      <div class="flex flex-center text-[18px] justify-evenly overflow-hidden">
-        
-          <div class=" h-[42px] w-[120px] ">
-            <div class="flex justify-start items-start w-full ">
-              <img class="w-full" src="./src/assets/movielogo.jpeg" alt="logo" />
-            </div>
+      <div
+        class="flex flex-start text-[18px] items-start justify-evenly overflow-hidden gap-50"
+      >
+        <div class="h-[100px] w-[120px]">
+          <div class="flex justify-start items-start w-full">
+            <img class="w-full" src="./assets/movielogo.jpeg" alt="logo" />
           </div>
-          <div class="h-[22px] w-[550px]">
-            <ul class="flex flex-row justify-center m-8 p-1 gap-15 font-bold text-2xl text-white">
-              <li class="hover:bg-blue-400"><a href="">Home</a></li>
-              <li class="hover:bg-blue-400"><a href="./src/journal.html">Journal</a></li>
-            </ul>
-          </div>
-          <div class="h-[42px] w-[467px] flex flex-row justify-center items-start text-black  m-8 p-1 ">
-            <div>
-              <input id="searchImput" class="mt-5 px-4 py-2 bg-green-500 hover:bg-blue-400 text-white rounded" type="text" placeholder="Search Movie/Info.." autocomplete="off">
-              <button id="searchBtn" class="mt-3 px-4 py-2 bg-yellow-500 hover:bg-blue-400 text-white rounded">Search</button>
-            </div>
-            <div>
-              <dialog id="myDialog" class="mt-5 px-4 py-2 bg-gradient-to-r from-[#ebe26e] to-[#06bdd1] text-black rounded">
-                <p id="dialogP"></p>
-                <div class="flex items-center px-[40%]">
-                <button commandfor="myDialog" command="close" class="mt-3 px-4 py-2 bg-gradient-to-r from-[#c5e332] to-pink-800 text-white rounded">Close</button>
-                </div>
-              </dialog>
-            </div>  
-          </div>
+        </div>
+        <div class="h-[22px] w-[450px]">
+          <ul
+            class="flex flex-row justify-start m-8 p-1 gap-15 font-bold text-2xl text-white"
+          >
+            <li class="hover:bg-blue-400"><a href="../index.html">Home</a></li>
+            <li class="hover:bg-blue-400"><a href="">Journal</a></li>
+          </ul>
+        </div>
       </div>
     </header>
-    
+
     <div class="container mx-auto p-4">
       <div
-        id="movie-container"
+        id="favmovie-container"
         class="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-5 gap-4"
       >
         <!-- Movie cards will be populated here -->
       </div>
     </div>
 
-    <script src="main.js"></script>
+    <script src="journal.js"></script>
 
     <!--Footer-->
-    <footer class="bg-gradient-to-r from-[#509134] to-pink-800 w-full h-70 flex justify-evenly items-start p-1" >
+    <footer
+      class="bg-gradient-to-r from-[#509134] to-pink-800 w-full h-70 flex justify-evenly items-start p-1"
+    >
       <div class="footer-logo w-[15%] py-5">
         <figure class="w-15">
-          <img src="./src/assets/movielogo.jpeg" alt="logo" />
+          <img src="./assets/movielogo.jpeg" alt="logo" />
         </figure>
         <p>Checkout your favourite movies.</p>
       </div>
@@ -95,10 +88,7 @@
               class="flex items-center gap-2"
               href="https://www.instagram.com/"
               target="_blank"
-              ><img
-                src="./src/assets/instagram.png"
-                alt="instagram"
-              />Instgram</a
+              ><img src="./assets/instagram.png" alt="instagram" />Instgram</a
             >
           </li>
           <li>
@@ -106,7 +96,7 @@
               class="flex items-center gap-2"
               href="https://www.facebook.com/"
               target="_blank"
-              ><img src="./src/assets/facebook.png" alt="facebook" />Facebook</a
+              ><img src="./assets/facebook.png" alt="facebook" />Facebook</a
             >
           </li>
           <li>
@@ -114,7 +104,7 @@
               class="flex items-center gap-2"
               href="https://www.x.com"
               target="_blank"
-              ><img src="./src/assets/twitterx.png" alt="twitterx" />Twitter</a
+              ><img src="./assets/twitterx.png" alt="twitterx" />Twitter</a
             >
           </li>
         </ul>
