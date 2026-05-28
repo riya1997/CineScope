@@ -8,11 +8,11 @@ movieArray.forEach((movie, index) => {
   let imageElem = document.createElement("img");
   let title = document.createElement("h2");
   title.textContent = movie.obj.title;
-  title.style.color = "black";
+  title.style.color = "#611105";
   title.style.fontWeight = "bold";
-  let infotextnode = document.createTextNode("Info: " + movie.obj.overview);
+  let infotextnode = document.createTextNode(movie.obj.overview);
   spanContainer.className =
-    "flex flex-col text-[#303738] items-center text-center justify-start bg-[#b37839] rounded-xl";
+    "flex flex-col text-[#303738] items-center text-center justify-start rounded-xl bg-gradient-to-r from-red-300 to-blue-800";
 
   let url = "https://image.tmdb.org/t/p/w500" + movie.obj.poster_path;
 
@@ -21,9 +21,13 @@ movieArray.forEach((movie, index) => {
   imageElem.className = "mb-4 rounded-xl";
   figElem.appendChild(imageElem);
   spanContainer.appendChild(figElem);
+  spanContainer.appendChild(document.createElement("br"));
+  let info = document.createElement("strong");
+  info.className = "text-[#252900]";
+  info.appendChild(infotextnode);
   spanContainer.appendChild(title);
   spanContainer.appendChild(document.createElement("br"));
-  spanContainer.appendChild(infotextnode);
+  spanContainer.appendChild(info);
 
   const addButton = document.createElement("button");
   addButton.textContent = movie.info ? "Update Note" : "Add Note";
@@ -35,6 +39,7 @@ movieArray.forEach((movie, index) => {
 
   if (movie.info) {
     noteDiv.textContent = "Note: " + movie.info;
+    noteDiv.style.fontWeight = "bold";
     spanContainer.appendChild(noteDiv);
   }
 
@@ -52,6 +57,7 @@ movieArray.forEach((movie, index) => {
 
       localStorage.setItem("favMovie", JSON.stringify(movieArray));
       noteDiv.textContent = "Note: " + textArea.value;
+      noteDiv.style.fontWeight = "bold";
       spanContainer.appendChild(noteDiv);
       addButton.textContent = "Update Note";
       if (textArea.value === "") {
