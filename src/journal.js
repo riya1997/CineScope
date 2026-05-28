@@ -12,7 +12,7 @@ movieArray.forEach((movie, index) => {
   title.style.fontWeight = "bold";
   let infotextnode = document.createTextNode("Info: " + movie.obj.overview);
   spanContainer.className =
-    "flex flex-col text-violet-600 item-center justify-start bg-green-100 rounded-md";
+    "flex flex-col text-[#303738] items-center text-center justify-start bg-[#b37839] rounded-xl";
 
   let url = "https://image.tmdb.org/t/p/w500" + movie.obj.poster_path;
 
@@ -28,10 +28,10 @@ movieArray.forEach((movie, index) => {
   const addButton = document.createElement("button");
   addButton.textContent = movie.info ? "Update Note" : "Add Note";
   addButton.classList =
-    "mt-3 px-4 py-2 bg-blue-200 hover:bg-blue-400 text-black rounded";
+    " w-[150px] mt-1 px-1 py-2 bg-[#4f335c] hover:bg-blue-400 text-white rounded";
 
   const noteDiv = document.createElement("div");
-  noteDiv.className = "mt-2 p-2 bg-blue-100 rounded";
+  noteDiv.className = " w-[150px] mt-2 px-1 py-2 bg-[#4f335c] text-white rounded";
 
   if (movie.info) {
     noteDiv.textContent = "Note: " + movie.info;
