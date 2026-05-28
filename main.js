@@ -23,7 +23,7 @@ const renderMovies = (movies, container) => {
 
 		let dataId = movie.id;
 		//console.log(dataId);
-		const allFavMovies = JSON.parse(localStorage.getItem('favMovie')) || [];   
+		let allFavMovies = JSON.parse(localStorage.getItem('favMovie')) || [];   
 		//console.log("allFavMovies:",allFavMovies);
 		//const index = (allFavMovies.length>0)?allFavMovies.findIndex(x => x.obj.id === dataId):(-1);
 		const index = allFavMovies.findIndex(x => x.obj.id === dataId);
@@ -80,7 +80,8 @@ const renderMovies = (movies, container) => {
 					localStorage.setItem('favMovie', JSON.stringify(allFavMovies));
 					favButton.textContent='Add to Fav';
 				}
-						
+				allFavMovies = JSON.parse(localStorage.getItem('favMovie')) || [];  
+				location.reload();	
 			});
 			//console.log(index);
 			if(index === -1){
